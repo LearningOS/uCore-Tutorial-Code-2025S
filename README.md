@@ -16,9 +16,9 @@ Course project for THU-OS.
 
 ```bash
 # GitHub 使用 https
-git clone https://github.com/LearningOS/uCore-Tutorial-Test-2024A.git user
+git clone https://github.com/LearningOS/uCore-Tutorial-Test-2025S.git user
 # GitHub 使用 ssh
-git clone git@github.com:LearningOS/uCore-Tutorial-Test-2024A.git user
+git clone git@github.com:LearningOS/uCore-Tutorial-Test-2025S.git user
 ```
 
 注意：`user` 已添加至 `.gitignore`，你无需将其提交，ci 也不会使用它
