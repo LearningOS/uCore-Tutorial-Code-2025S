@@ -112,9 +112,16 @@ QEMUGDB = $(shell if $(QEMU) -help | grep -q '^-gdb'; \
 	else echo "-s -p 15234"; fi)
 
 debug: build/kernel .gdbinit
-	$(QEMU) $(QEMUOPTS) -S $(QEMUGDB) &
-	sleep 1
-	$(GDB)
+	@tmux new-session -d \
+		$(QEMU) $(QEMUOPTS) -S $(QEMUGDB) && \
+		tmux split-window -h "$(GDB) -ex 'target remote localhost:15234'" && \
+		tmux -2 attach-session -d
+
+gdbserver: build/kernel
+	$(QEMU) $(QEMUOPTS) -S $(QEMUGDB)
+
+gdbclient:
+	$(GDB) -ex "target remote localhost:15234"
 
 CHAPTER ?= $(shell git rev-parse --abbrev-ref HEAD | grep -oP 'ch\K[0-9]')
 
